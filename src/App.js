@@ -1,24 +1,27 @@
-import logo from './logo.svg';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Links from './components/Links';
+import FreeApi from './components/FreeApi';
+import SecuredApi from './components/SecuredApi';
+import Login from './components/Login';
+import { useState } from 'react';
 import './App.css';
 
 function App() {
+  const [user, setUser] = useState('');
+  const [token, setToken] = useState('');
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Links user={user} setToken={setToken} setUser={setUser} />
+      <Routes>
+        <Route path='/' element={<FreeApi />} />
+        <Route path='/secured' element={<SecuredApi token={token} />} />
+        <Route
+          path='/login'
+          element={<Login setUser={setUser} setToken={setToken} />}
+        />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
