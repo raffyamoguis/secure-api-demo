@@ -54,7 +54,7 @@ const Login = ({ setUser, setToken }) => {
       <form onSubmit={form.onSubmit((values) => handleLogin(values))}>
         <TextInput
           withAsterisk
-          label='Email'
+          label='Username'
           placeholder='Username or email'
           {...form.getInputProps('username')}
         />
